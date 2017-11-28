@@ -1,36 +1,34 @@
 buildscript {
-    val kotlinVersion = "1.2.0-rc-84"
+    val jUnitPlatformPluginVersion = "1.0.2"
 
     repositories {
         mavenCentral()
-        maven(url = "http://dl.bintray.com/kotlin/kotlin-eap-1.2")
     }
     dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.junit.platform:junit-platform-gradle-plugin:$jUnitPlatformPluginVersion")
     }
 }
 
 plugins {
-    java
-}
-
-apply {
-    plugin("kotlin")
+    id("org.jetbrains.kotlin.jvm") version "1.2.0"
 }
 
 val hamcrestVersion by project
 val junitJupiterVersion by project
 val log4jVersion by project
 
+apply {
+    plugin("org.junit.platform.gradle.plugin")
+}
+
 repositories {
     mavenCentral()
-    maven(url = "http://dl.bintray.com/kotlin/kotlin-eap-1.2")
 }
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jre8")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion")
+
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.hamcrest:java-hamcrest:$hamcrestVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")

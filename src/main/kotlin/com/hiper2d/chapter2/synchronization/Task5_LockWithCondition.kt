@@ -72,7 +72,7 @@ class Buffer(private val maxSize: Int) {
     @Synchronized fun hasPendingLineOrNonEmptyBuffer() = pendingLines || buffer.isNotEmpty()
 }
 
-class Producer(private val mock: FileMock, private val buffer: Buffer): Runnable {
+private class Producer(private val mock: FileMock, private val buffer: Buffer): Runnable {
     override fun run() {
         buffer.setPendingLines(true)
         while (mock.hasMoreLines()) {
@@ -82,7 +82,7 @@ class Producer(private val mock: FileMock, private val buffer: Buffer): Runnable
     }
 }
 
-class Consumer(private val buffer: Buffer): Runnable {
+private class Consumer(private val buffer: Buffer): Runnable {
     private val rand = ThreadLocalRandom.current()
 
     override fun run() {
