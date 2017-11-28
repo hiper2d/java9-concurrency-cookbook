@@ -3,7 +3,7 @@ package com.hiper2d.chapter2.synchronization
 import java.lang.Thread.sleep
 
 
-class ParkingCash {
+private class ParkingCash {
     companion object {
         private const val COST = 2L
     }
@@ -22,7 +22,7 @@ class ParkingCash {
     }
 }
 
-class ParkingStats(
+private class ParkingStats(
         var numberCars: Long = 0L,
         var numberMotorcycles: Long = 0L,
         val parkingCash: ParkingCash,
@@ -56,7 +56,7 @@ class ParkingStats(
     }
 }
 
-class Sensor(val stats: ParkingStats): Runnable {
+private class Sensor(val stats: ParkingStats): Runnable {
     override fun run() {
         (1..10).forEach {
             stats.carComeIn()
@@ -77,7 +77,7 @@ fun main(args: Array<String>) {
     val parkingStats = ParkingStats(parkingCash = parkingCash)
     val numberOfSensors = Runtime.getRuntime().availableProcessors() * 2
 
-    val threads = Array(numberOfSensors, arrayOfThreads(parkingStats))
+    val threads = arrayOfThreads(numberOfSensors, parkingStats)
 
     (1..numberOfSensors).forEachIndexed { i, _ -> threads[i].join() }
 
@@ -86,8 +86,8 @@ fun main(args: Array<String>) {
     parkingCash.close()
 }
 
-private fun arrayOfThreads(parkingStats: ParkingStats): (Int) -> Thread {
-    return {
+private fun arrayOfThreads(numberOfSensors: Int, parkingStats: ParkingStats): Array<Thread> {
+    return Array(numberOfSensors) {
         val sensor = Sensor(stats = parkingStats)
         val tr = Thread(sensor)
         tr.start()

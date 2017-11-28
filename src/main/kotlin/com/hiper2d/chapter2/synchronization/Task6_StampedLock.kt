@@ -6,7 +6,7 @@ import java.util.concurrent.locks.StampedLock
 
 class Position(var x: Int = 0, var y: Int = 0)
 
-class Writer(private val position: Position, private val lock: StampedLock): Runnable {
+private class Writer(private val position: Position, private val lock: StampedLock): Runnable {
     override fun run() {
         (1..10).forEach {
             val stamp = lock.writeLock()
@@ -25,7 +25,7 @@ class Writer(private val position: Position, private val lock: StampedLock): Run
     }
 }
 
-class Reader(private val position: Position, private val lock: StampedLock): Runnable {
+private class Reader(private val position: Position, private val lock: StampedLock): Runnable {
     override fun run() {
         (1..50).forEach {
             val stamp = lock.readLock()
@@ -39,7 +39,7 @@ class Reader(private val position: Position, private val lock: StampedLock): Run
     }
 }
 
-class OptimisticReader(private val position: Position, private val lock: StampedLock): Runnable {
+private class OptimisticReader(private val position: Position, private val lock: StampedLock): Runnable {
     override fun run() {
         (1..100).forEach {
             val stamp = lock.tryOptimisticRead()
