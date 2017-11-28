@@ -79,9 +79,7 @@ fun main(args: Array<String>) {
 
     val threads = Array(numberOfSensors, arrayOfThreads(parkingStats))
 
-    (1..numberOfSensors).forEachIndexed { i, _ ->
-        threads[i].join()
-    }
+    (1..numberOfSensors).forEachIndexed { i, _ -> threads[i].join() }
 
     println("Number of cars: ${parkingStats.numberCars}")
     println("Number of motocycles: ${parkingStats.numberMotorcycles}")

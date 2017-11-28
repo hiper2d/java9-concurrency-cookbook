@@ -1,5 +1,5 @@
 buildscript {
-    val kotlinVersion = "1.2.0-rc-39"
+    val kotlinVersion = "1.2.0-rc-84"
 
     repositories {
         mavenCentral()
