@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
 
-private class PrintQueue  (
+class PrintQueue  (
         private val semaphore: Semaphore = Semaphore(3),
         private val freePrinters: Array<Boolean> = Array(3) { true },
         private val lockPrinters: Lock = ReentrantLock()
@@ -41,7 +41,7 @@ private class PrintQueue  (
     }
 }
 
-private class PrintJob(private val printQueue: PrintQueue): Runnable {
+class PrintJob(private val printQueue: PrintQueue): Runnable {
     override fun run() {
         println("${Thread.currentThread().name}: Going to print a job")
         printQueue.printJob("some string")
