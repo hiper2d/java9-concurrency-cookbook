@@ -18,9 +18,13 @@ class FileSearch(
         println("${Thread.currentThread().name}: Starting.")
 
         if (Files.isDirectory(initPath)) directoryProcess(initPath)
-        if (!checkResults()) return
+        if (!checkResults()) { // calls arriveAndDeregister() inside
+            return
+        }
         filterResults()
-        if (!checkResults()) return
+        if (!checkResults()) { // calls arriveAndDeregister() inside
+            return
+        }
         showInfo()
 
         phaser.arriveAndDeregister()

@@ -1,6 +1,5 @@
 package com.hiper2d.chapter3.utilities
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.concurrent.Phaser
 import java.util.concurrent.ThreadLocalRandom
