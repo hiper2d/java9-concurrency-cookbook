@@ -70,7 +70,7 @@ fun main(args: Array<String>) {
         println("Main: The CompletableFuture example has been completed")
     }
 
-    finalFuture.get()
+    finalFuture.join()
 }
 
 private fun findDistance(numbers: List<Long>): Long {
