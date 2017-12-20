@@ -3,7 +3,7 @@ package com.hiper2d.chapter1.threads
 import com.hiper2d.isPrime
 import java.lang.Thread.sleep
 
-class PrimeGenerator: Thread() {
+private class PrimeGenerator: Thread() {
     override fun run() {
         var counter = 1L
         while (true) {

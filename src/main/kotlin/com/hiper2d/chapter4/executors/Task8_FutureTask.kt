@@ -2,7 +2,7 @@ package com.hiper2d.chapter4.executors
 
 import java.util.concurrent.*
 
-class ExecutableTask(val name: String): Callable<String> {
+private class ExecutableTask(val name: String): Callable<String> {
     override fun call(): String {
         val duration = ThreadLocalRandom.current().nextLong(10)
         println("$name: Waiting $duration seconds for results.")
@@ -11,7 +11,7 @@ class ExecutableTask(val name: String): Callable<String> {
     }
 }
 
-class ResultFutureTask(callable: ExecutableTask): FutureTask<String>(callable) {
+private class ResultFutureTask(callable: ExecutableTask): FutureTask<String>(callable) {
     private val name = callable.name
 
     override fun done() {
@@ -24,7 +24,7 @@ class ResultFutureTask(callable: ExecutableTask): FutureTask<String>(callable) {
 
 fun main(args: Array<String>) {
     val executor = Executors.newCachedThreadPool()
-    val futureTasks = createFiveFutureTasks(executor)
+    val futureTasks = createAndSubmitFiveFutureTasks(executor)
 
     TimeUnit.SECONDS.sleep(5)
     futureTasks.forEach { it.cancel(true) }
@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
     executor.shutdown()
 }
 
-private fun createFiveFutureTasks(executor: ExecutorService): Array<ResultFutureTask> {
+private fun createAndSubmitFiveFutureTasks(executor: ExecutorService): Array<ResultFutureTask> {
     return Array(5) {
         val task = ExecutableTask("Task $it")
         val futureTask = ResultFutureTask(task)
