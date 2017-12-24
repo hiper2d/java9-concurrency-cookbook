@@ -3,7 +3,7 @@ package com.hiper2d.chapter4.executors
 import java.time.LocalDateTime
 import java.util.concurrent.*
 
-class Task(private val name: String): Runnable {
+private class Task(private val name: String): Runnable {
     private val initDate = LocalDateTime.now()
 
     override fun run() {
@@ -16,7 +16,7 @@ class Task(private val name: String): Runnable {
     }
 }
 
-class RejectedTaskController: RejectedExecutionHandler {
+private class RejectedTaskController: RejectedExecutionHandler {
     override fun rejectedExecution(r: Runnable, executor: ThreadPoolExecutor) {
         println("RejectedTaskController: The task $r has been rejected")
         println("RejectedTaskController: Executor $executor")
@@ -25,14 +25,14 @@ class RejectedTaskController: RejectedExecutionHandler {
     }
 }
 
-class Server {
+private class Server {
     private val executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()) as ThreadPoolExecutor
 
     init {
         executor.rejectedExecutionHandler = RejectedTaskController()
     }
 
-    fun executeTast(task: Task) {
+    fun executeTask(task: Task) {
         println("Server: A new task has arrived")
         executor.execute(task)
         println("Server: Pool Size: ${executor.poolSize}")
@@ -50,13 +50,13 @@ fun main(args: Array<String>) {
     val server = Server()
     println("Main: Starting.")
     (0 until 100).forEach {
-        server.executeTast(Task("Task $it"))
+        server.executeTask(Task("Task $it"))
     }
     println("Main: Shutting down the Executor.")
     server.endServer()
 
     println("Main: Sending another Task.")
-    server.executeTast(Task("Rejected Task"))
+    server.executeTask(Task("Rejected Task"))
 
     println("Main: End.")
 }
