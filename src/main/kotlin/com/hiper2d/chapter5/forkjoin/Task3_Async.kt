@@ -26,6 +26,7 @@ private class FolderProcessor: CountedCompleter<List<String>> {
     override fun compute() {
         Files.newDirectoryStream(path).toList().forEach {
             if (Files.isDirectory(it)) {
+                addToPendingCount(1)
                 forkSubfolderTask(it)
             } else {
                 processFile(it)
@@ -47,7 +48,6 @@ private class FolderProcessor: CountedCompleter<List<String>> {
 
     private fun forkSubfolderTask(it: Path) {
         val task = FolderProcessor(this, it, extension)
-        addToPendingCount(1)
         task.fork()
         tasks.add(task)
     }
