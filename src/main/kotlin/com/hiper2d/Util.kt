@@ -10,6 +10,8 @@ fun Long.isPrime(): Boolean {
     return (2 until this).none { this.rem(it) == 0L }
 }
 
+fun Int.mid(start: Int): Int = (this + start) / 2
+
 fun printThreadInfo(logger: Logger, thread: Thread, state: Thread.State?) {
     logger.info("Main: Id ${thread.id}, name ${thread.name}")
     logger.info("Main: Priority ${thread.priority}")
