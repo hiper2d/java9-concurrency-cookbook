@@ -11,9 +11,7 @@ class PrintQueue  (
         private val freePrinters: Array<Boolean> = Array(3) { true },
         private val lockPrinters: Lock = ReentrantLock()
 ) {
-    private val rand = ThreadLocalRandom.current()
-
-    fun printJob(document: Any) {
+    fun printJob() {
         try {
             semaphore.acquire()
             val duration = ThreadLocalRandom.current().nextLong(10)
@@ -44,7 +42,7 @@ class PrintQueue  (
 class PrintJob(private val printQueue: PrintQueue): Runnable {
     override fun run() {
         println("${Thread.currentThread().name}: Going to print a job")
-        printQueue.printJob("some string")
+        printQueue.printJob()
         println("${Thread.currentThread().name}: The document has been printed")
     }
 }

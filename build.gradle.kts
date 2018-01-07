@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     val jUnitPlatformPluginVersion = "1.0.2"
 
@@ -32,5 +34,11 @@ dependencies {
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.hamcrest:java-hamcrest:$hamcrestVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 

@@ -2,6 +2,9 @@ package com.hiper2d
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.time.LocalDate
+import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 fun Long.isPrime(): Boolean {
     if (this <= 2) {
@@ -20,3 +23,10 @@ fun printThreadInfo(logger: Logger, thread: Thread, state: Thread.State?) {
 }
 
 inline fun <reified T> logger(): Logger = LoggerFactory.getLogger(T::class.java)
+
+fun randomLocalDate(): LocalDate {
+    val startDay = LocalDate.of(1970, 1, 1).toEpochDay()
+    val endDay = LocalDate.now().toEpochDay()
+    val randomEpochDay = ThreadLocalRandom.current().nextLong(startDay, endDay)
+    return LocalDate.ofEpochDay(randomEpochDay)
+}
