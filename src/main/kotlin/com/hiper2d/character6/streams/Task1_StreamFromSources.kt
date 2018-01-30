@@ -1,54 +1,16 @@
 package com.hiper2d.character6.streams
 
-import com.hiper2d.randomLocalDate
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.time.LocalDate
 import java.util.*
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.function.Supplier
 import java.util.stream.Stream
 
-private val NAMES = arrayOf("Mary", "Patricia", "Linda", "Barbara", "Elizabeth", "James", "John", "Robert", "Michael", "William")
-private val LASTNAMES = arrayOf("Smith", "Jones", "Taylor", "Williams", "Brown", "Davies", "Evans", "Wilson", "Thomas", "Roberts")
-
-private class Person(
-        val id: Int,
-        val firstName: String,
-        val lastName: String,
-        val birthDate: LocalDate,
-        val salary: Int,
-        val coeficient: Double
-): Comparable<Person> {
-    override fun compareTo(other: Person): Int {
-        val lastNameCompare = lastName.compareTo(other.lastName)
-        return when (lastNameCompare) {
-            0 -> firstName.compareTo(other.firstName)
-            else -> lastNameCompare
-        }
-    }
-}
-
 private class StringSupplier: Supplier<String> {
     private val counter = AtomicInteger(0)
 
     override fun get(): String = "String ${counter.getAndIncrement()}"
-}
-
-private fun generatePersonList(size: Int): List<Person> {
-    val rand = Random()
-    return (1 until size).map { generatePerson(it, rand) }.toList()
-}
-
-private fun generatePerson(id: Int, rand: Random): Person {
-    return Person(
-            id,
-            NAMES[rand.nextInt(10)],
-            LASTNAMES[rand.nextInt(10)],
-            randomLocalDate(),
-            rand.nextInt(100_000),
-            rand.nextDouble()
-    )
 }
 
 fun main(args: Array<String>) {

@@ -17,7 +17,9 @@ class FileSearch(
         phaser.arriveAndAwaitAdvance()
         println("${Thread.currentThread().name}: Starting.")
 
-        if (Files.isDirectory(initPath)) directoryProcess(initPath)
+        if (Files.isDirectory(initPath)) {
+            directoryProcess(initPath)
+        }
         if (!checkResults()) { // calls arriveAndDeregister() inside
             return
         }

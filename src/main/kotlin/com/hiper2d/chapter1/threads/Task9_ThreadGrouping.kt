@@ -39,7 +39,7 @@ fun main(args: Array<String>) {
     println("Information about all threads:")
     threadGroup.list()
 
-    var threads = Array<Thread?>(threadGroup.activeCount()) { null }
+    val threads = Array<Thread?>(threadGroup.activeCount()) { null }
     threadGroup.enumerate(threads)
     threads.forEach {
         println("Thread ${it?.name} has state ${it?.state}")

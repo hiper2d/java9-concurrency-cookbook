@@ -12,7 +12,7 @@ buildscript {
 }
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.2.10"
+    id("org.jetbrains.kotlin.jvm") version "1.2.20"
 }
 
 val hamcrestVersion by project
