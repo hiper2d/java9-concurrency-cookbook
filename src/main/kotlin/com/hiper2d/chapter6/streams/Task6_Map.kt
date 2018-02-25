@@ -1,4 +1,4 @@
-package com.hiper2d.character6.streams
+package com.hiper2d.chapter6.streams
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit

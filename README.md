@@ -6,4 +6,4 @@ Java9 Concurrency Cookbook recipes in Kotlin
 ### Technology stack
 * Gradle 4
 * jUnit 5
-* Kotlin 1.2 beta
+* Kotlin 1.2

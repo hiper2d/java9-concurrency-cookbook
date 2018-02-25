@@ -1,4 +1,4 @@
-package com.hiper2d.character6.streams
+package com.hiper2d.chapter6.streams
 
 import com.hiper2d.randomLocalDate
 import java.time.LocalDate
