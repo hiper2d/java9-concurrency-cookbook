@@ -1,6 +1,5 @@
 package com.hiper2d.chapter7.collections
 
-import com.hiper2d.waitForThreads
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.PriorityBlockingQueue
 
@@ -21,7 +20,8 @@ private class TaskEvent(val id: Int, val queue: BlockingQueue<Event>): Runnable 
 fun main(args: Array<String>) {
     val queue = PriorityBlockingQueue<Event>()
     val threads = createAndStartThreads(queue)
-    waitForThreads(threads)
+    threads.forEach { it.join() }
+
     pollAllEventsForQueue(threads, queue)
     println("Main: Queue Size: ${queue.size}")
 }

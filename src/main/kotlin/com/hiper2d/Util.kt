@@ -30,7 +30,3 @@ fun randomLocalDate(): LocalDate {
     val randomEpochDay = ThreadLocalRandom.current().nextLong(startDay, endDay)
     return LocalDate.ofEpochDay(randomEpochDay)
 }
-
-fun waitForThreads(threads: List<Thread>) {
-    threads.forEach { it.join() }
-}
