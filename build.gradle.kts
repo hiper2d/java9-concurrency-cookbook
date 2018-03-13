@@ -3,8 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val kotlin_version: String by extra
 
 buildscript {
-    var kotlin_version: String by extra
-    kotlin_version = "1.2.21"
     val jUnitPlatformPluginVersion = "1.0.2"
 
     repositories {
@@ -12,12 +10,11 @@ buildscript {
     }
     dependencies {
         classpath("org.junit.platform:junit-platform-gradle-plugin:$jUnitPlatformPluginVersion")
-        classpath(kotlinModule("gradle-plugin", kotlin_version))
     }
 }
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.2.21"
+    kotlin("jvm") version "1.2.30"
 }
 
 val hamcrestVersion by project
@@ -26,7 +23,6 @@ val log4jVersion by project
 
 apply {
     plugin("org.junit.platform.gradle.plugin")
-    plugin("kotlin")
 }
 
 repositories {
@@ -40,7 +36,6 @@ dependencies {
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.hamcrest:java-hamcrest:$hamcrestVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
-    compile(kotlinModule("stdlib-jdk8", kotlin_version))
 }
 
 tasks.withType<KotlinCompile> {
