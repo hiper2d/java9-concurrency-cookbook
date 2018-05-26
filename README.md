@@ -1,9 +1,8 @@
-Java9 Concurrency Cookbook recipes in Kotlin
+Java 9 Concurrency Cookbook recipes in Kotlin
 =============
 
 [![TravisCI Build](https://travis-ci.org/hiper2d/java9-concurrency-cookbook.svg)](https://travis-ci.org/hiper2d/java9-concurrency-cookbook)
 
 ### Technology stack
-* Gradle 4
-* jUnit 5
-* Kotlin 1.2
+* Gradle 4.7 with Kotlin Script and jUnit 5
+* Kotlin 1.2.41
