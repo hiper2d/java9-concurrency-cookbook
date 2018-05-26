@@ -1,52 +1,36 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-buildscript {
-    val jUnitPlatformPluginVersion = "1.0.2"
-
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.junit.platform:junit-platform-gradle-plugin:$jUnitPlatformPluginVersion")
-    }
-}
-
 plugins {
-    kotlin("jvm") version "1.2.31"
+    base
+    kotlin("jvm") version "1.2.41"
 }
 
-val hamcrestVersion by project
-val junitJupiterVersion by project
-val log4jVersion by project
-
-apply {
-    plugin("org.junit.platform.gradle.plugin")
-}
+val hamcrestVersion: Any? by project
+val junitJupiterVersion: Any? by project
+val log4jVersion: Any? by project
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jre8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:$log4jVersion")
 
-    testCompileOnly("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.hamcrest:java-hamcrest:$hamcrestVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "1.8"
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "1.8"
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+        }
     }
-}
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    withType<Test> {
+        useJUnitPlatform()
+    }
 }
