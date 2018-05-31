@@ -6,4 +6,4 @@ Java 9 Concurrency Cookbook recipes in Kotlin
 ### Technology stack
 * Gradle 4.7 with Kotlin Script and jUnit 5
 * Kotlin 1.2.41
-* Kotlin Coroutines as Threads alternative in some examples
+* Kotlin Coroutines in some tasks
