@@ -1,6 +1,7 @@
 package com.hiper2d.chapter7.collections.task7.atomic
 
 import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 import kotlinx.coroutines.experimental.runBlocking
 
 private fun runCompanyTransactions(account: Account) {
@@ -17,9 +18,11 @@ fun main(args: Array<String>) {
     val account = Account(1000)
     println("Account: initial balance ${account.balance}")
 
+    val pool = newFixedThreadPoolContext(2, "Async")
+
     runBlocking {
-        val bankJob = async { runBankTransactions(account) }
-        val companyJob = async { runCompanyTransactions(account) }
+        val bankJob = async(pool) { runBankTransactions(account) }
+        val companyJob = async(pool) { runCompanyTransactions(account) }
 
         bankJob.join()
         companyJob.join()
