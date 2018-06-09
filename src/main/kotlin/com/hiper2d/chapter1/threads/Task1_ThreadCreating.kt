@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
     val threads = arrayOfThreads()
 
     threads.forEachIndexed { index, thread ->
-        logger.info("Main: Status of thread ${thread.state}")
+        logger.debug("Main: Status of thread ${thread.state}")
         statuses[index] = thread.state
         thread.start()
     }

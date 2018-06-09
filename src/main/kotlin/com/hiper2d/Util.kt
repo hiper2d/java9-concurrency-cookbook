@@ -23,6 +23,7 @@ fun printThreadInfo(logger: Logger, thread: Thread, state: Thread.State?) {
 }
 
 inline fun <reified T> logger(): Logger = LoggerFactory.getLogger(T::class.java)
+fun logger(path: String): Logger = LoggerFactory.getLogger(path)
 
 fun randomLocalDate(): LocalDate {
     val startDay = LocalDate.of(1970, 1, 1).toEpochDay()
