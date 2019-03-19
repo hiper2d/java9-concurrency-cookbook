@@ -72,7 +72,7 @@ private class Sensor(val stats: ParkingStats): Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val parkingCash = ParkingCash()
     val parkingStats = ParkingStats(parkingCash = parkingCash)
     val numberOfSensors = Runtime.getRuntime().availableProcessors() * 2

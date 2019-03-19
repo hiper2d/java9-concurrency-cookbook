@@ -26,10 +26,10 @@ class SafeTask: Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     // val task = UnsafeTask()
     val task = SafeTask()
-    (1..3).forEach {
+    repeat(3) {
         Thread(task).start()
         TimeUnit.SECONDS.sleep(2)
     }

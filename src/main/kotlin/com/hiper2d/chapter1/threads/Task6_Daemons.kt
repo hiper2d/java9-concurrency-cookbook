@@ -39,9 +39,9 @@ class CleanerTask(val deque: Deque<Event>): Thread() {
 
 class Event(val date: LocalDateTime)
 
-fun main(args: Array<String>) {
+fun main() {
     val deque = ConcurrentLinkedDeque<Event>()
-    (1..Runtime.getRuntime().availableProcessors()).forEach {
+    repeat(Runtime.getRuntime().availableProcessors()) {
         Thread(WriterTask(deque)).start()
     }
     CleanerTask(deque).start()

@@ -20,7 +20,7 @@ class NetworkConnectionLoader: Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val dsLoader = Thread(DataSourcesLoader(), "DataSourcesLoader")
     val ncLoader = Thread(NetworkConnectionLoader(), "NetworkConnectionLoader")
 

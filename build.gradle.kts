@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     base
-    kotlin("jvm") version "1.2.61"
+    kotlin("jvm") version "1.3.21"
     id("me.champeau.gradle.jmh") version "0.4.6"
 }
 

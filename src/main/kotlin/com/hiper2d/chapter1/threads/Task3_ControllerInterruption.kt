@@ -6,19 +6,18 @@ import java.nio.file.Paths
 import java.util.concurrent.TimeUnit
 
 
-class FileSearch(val initPath: String, val fileName: String): Runnable {
+class FileSearch(private val initPath: String, private val fileName: String): Runnable {
     override fun run() {
         try {
             directoryProcess(Paths.get(initPath))
         } catch (e: InterruptedException) {
             println("${Thread.currentThread().name}: The search was interrupted.")
         }
-
     }
 
     private fun directoryProcess(path: Path) {
-        Files.newDirectoryStream(path).use {
-            it.forEach {
+        Files.newDirectoryStream(path).use { dirStream ->
+            dirStream.forEach {
                 when (Files.isDirectory(it)) {
                     true -> directoryProcess(it)
                     false -> fileProcess(it)
@@ -41,9 +40,9 @@ class FileSearch(val initPath: String, val fileName: String): Runnable {
     }
 }
 
-fun main(args: Array<String>) {
-    val task = Thread(FileSearch("/Users/alexeyzelenovsky/Documents", "build.gradle.kts"))
-    task.start()
+fun main() {
+    val thread = Thread(FileSearch("/Users/alexeyzelenovsky/Documents", "build.gradle.kts"))
+    thread.start()
     TimeUnit.SECONDS.sleep(2)
-    task.interrupt()
+    thread.interrupt()
 }

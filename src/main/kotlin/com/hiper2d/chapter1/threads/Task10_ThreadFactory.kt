@@ -29,12 +29,12 @@ class AwesomeTask: Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val factory = MyThreadFactory("AwesomeFactory")
     val task = AwesomeTask()
 
     println("Starting threads")
-    (1..10).forEach { factory.newThread(task).start() }
+    repeat(10) { factory.newThread(task).start() }
 
     println("Factory stats:")
     println(factory.getStats())

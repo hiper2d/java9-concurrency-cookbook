@@ -18,7 +18,7 @@ class Task: Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val thr = Thread(Task())
     thr.uncaughtExceptionHandler = ExceptionHandler()
     thr.start()

@@ -14,7 +14,7 @@ class Calculator: Runnable {
 
 val logger = logger<Calculator>()
 
-fun main(args: Array<String>) {
+fun main() {
     println("Minimum priority: ${Thread.MIN_PRIORITY}")
     println("Normal priority: ${Thread.NORM_PRIORITY}")
     println("Minimum priority: ${Thread.MAX_PRIORITY}")

@@ -27,11 +27,11 @@ class TaskWithError: Runnable {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val threadGroup = MyThreadGroup("MyThreadGroup")
     val threadsCount = Runtime.getRuntime().availableProcessors() * 2
     val task = TaskWithError()
-    (1..threadsCount).forEach {
+    repeat(threadsCount) {
         Thread(threadGroup, task).start()
     }
 

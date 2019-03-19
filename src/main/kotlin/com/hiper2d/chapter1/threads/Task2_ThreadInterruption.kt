@@ -19,7 +19,7 @@ private class PrimeGenerator: Thread() {
     }
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val task: Thread = PrimeGenerator()
     task.start()
     sleep(2000)
